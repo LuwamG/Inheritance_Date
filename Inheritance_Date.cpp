@@ -1,20 +1,76 @@
-// Inheritance_Date.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
+#include "Inheritance_Date.hpp"
+#include "Time.hpp"
 #include <iostream>
+using namespace std;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+bool isLeapYear(int year) {
+    return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+int getDaysInMonth(int month, int year) {
+    switch (month) {
+    case 1: case 3: case 5: case 7: case 8: case 10: case 12: return 31;
+    case 4: case 6: case 9: case 11: return 30;
+    case 2: return isLeapYear(year) ? 29 : 28;
+    default: return 0;
+    }
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+Date::Date(int day, int month, int year) : day(day), month(month), year(year) {}
+
+int Date::getDay() const { return day; }
+int Date::getMonth() const { return month; }
+int Date::getYear() const { return year; }
+
+void Date::addDays(int days) {
+    day += days;
+    while (day > getDaysInMonth(month, year)) {
+        day -= getDaysInMonth(month, year);
+        month++;
+        if (month > 12) {
+            month = 1;
+            year++;
+        }
+    }
+    while (day < 1) {
+        month--;
+        if (month < 1) {
+            month = 12;
+            year--;
+        }
+        day += getDaysInMonth(month, year);
+    }
+}
+
+void Date::addMonths(int months) {
+    month += months;
+    while (month > 12) {
+        month -= 12;
+        year++;
+    }
+    while (month < 1) {
+        month += 12;
+        year--;
+    }
+    int daysInMonth = getDaysInMonth(month, year);
+    if (day > daysInMonth) {
+        day = daysInMonth;
+    }
+}
+
+void Date::addYears(int years) {
+    year += years;
+    if (month == 2 && day == 29 && !isLeapYear(year)) {
+        day = 28;
+    }
+}
+
+int Date::calculateDateDifference(const Date& other) const {
+    int totalDays = 0;
+    Date temp = *this;
+    while (temp.year != other.year || temp.month != other.month || temp.day != other.day) {
+        temp.addDays(other.day > temp.day ? 1 : -1);
+        totalDays++;
+    }
+    return totalDays;
+}
