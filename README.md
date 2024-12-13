@@ -21,5 +21,7 @@ Files and Structure
 DateTime.hpp: Header for Date, Time, and DateTime classes.
 DateTime.cpp: Method definitions for Date, Time, and DateTime.
 main.cpp: Example usage of the library.
-Inheritance_Date.hpp: Contains the Date class.
+Inheritance_Date.hpp: Contains the Date cl
+ass.
 Time.hpp: Contains the Time class (for time handling).
+
