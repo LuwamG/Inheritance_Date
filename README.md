@@ -14,14 +14,13 @@ Check for leap years and calculate days in a month, considering leap years for F
 Date Difference Calculation:
 
 Calculate the difference between two Date objects in total days.
-Serialization:
 
-Serialize DateTime objects to strings and deserialize them back.
+
+
 Files and Structure
 DateTime.hpp: Header for Date, Time, and DateTime classes.
 DateTime.cpp: Method definitions for Date, Time, and DateTime.
 main.cpp: Example usage of the library.
-Inheritance_Date.hpp: Contains the Date cl
-ass.
+Inheritance_Date.hpp: Contains the Date class.
 Time.hpp: Contains the Time class (for time handling).
 
