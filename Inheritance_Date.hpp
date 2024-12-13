@@ -1,5 +1,5 @@
-#ifndef DATE_HPP
-#define DATE_HPP
+#ifndef INHERITANCE_DATE_HPP
+#define iNHERITANCE_DATE_HPP
 
 #include <iostream>
 using namespace std;
